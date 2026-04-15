@@ -124,14 +124,11 @@
             
             /* Enable scrolling within the tab */
             overflow-y: auto; 
+            overflow-x: hidden;
             
             /* CRITICAL: CSS Scroll Snapping Settings */
             scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
-            
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             
             opacity: 0;
             visibility: hidden;
@@ -149,8 +146,10 @@
         .static-padding {
             padding: 120px 20px 60px 20px;
             width: 100%;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
+            align-items: center; /* Centers short content vertically */
         }
 
         /* The Scroll Snap Container (Locks onto the screen) */
@@ -160,7 +159,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 80px 20px; /* Accounts for nav bar */
+            padding: 120px 20px 60px 20px; /* Accounts for nav bar */
             
             /* CRITICAL: Tells the browser to magnetize to the center of this div */
             scroll-snap-align: center;
