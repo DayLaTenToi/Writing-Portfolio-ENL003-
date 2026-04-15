@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinematic Writing Portfolio - Scroll Snap Mode</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base Reset & Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #ffffff;
+            background-color: #050505;
+            /* Locks the main website from global scrolling */
+            overflow: hidden; 
+        }
+
+        /* --- BACKGROUND SYSTEM --- */
+        .bg-system {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+        }
+
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out; /* Smooth crossfade */
+        }
+
+        .bg-image.active {
+            opacity: 1;
+        }
+
+        /* The Black Overlay */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.75); /* Dark editorial overlay */
+            z-index: -1;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0));
+            z-index: 100;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: #d1d1d1;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            padding-bottom: 5px;
+            position: relative;
+        }
+
+        /* Animated gold underline for the active tab */
+        nav button::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #c5a880;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav button:hover, nav button.active {
+            color: #c5a880;
+        }
+
+        nav button.active::after {
+            width: 100%;
+        }
+
+        /* --- CONTENT SECTIONS (THE APP PAGES) --- */
+        .section-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            
+            /* Enable scrolling within the tab */
+            overflow-y: auto; 
+            
+            /* CRITICAL: CSS Scroll Snapping Settings */
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+            z-index: 10;
+        }
+
+        section.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 20;
+        }
+
+        /* Single Page Content Wrappers */
+        .static-padding {
+            padding: 120px 20px 60px 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* The Scroll Snap Container (Locks onto the screen) */
+        .snap-slide {
+            width: 100%;
+            min-height: 100vh; /* Forces the slide to take up the full screen */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px; /* Accounts for nav bar */
+            
+            /* CRITICAL: Tells the browser to magnetize to the center of this div */
+            scroll-snap-align: center;
+            scroll-snap-stop: always; /* Forces it to stop, preventing skipping past it */
+        }
+
+        /* Glassmorphism Reading Cards */
+        .content-card {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 4rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            
+            /* Slide up animation state */
+            transform: translateY(20px);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        section.active .content-card {
+            transform: translateY(0);
+        }
+
+        /* Typography */
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        h3.entry-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #c5a880; /* Gold Accent */
+            font-style: italic;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Decorative Elements */
+        .gold-divider {
+            width: 60px;
+            height: 2px;
+            background-color: #c5a880;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* Elegant Blank States */
+        .blank-state {
+            background: linear-gradient(to right, rgba(197, 168, 128, 0.05), transparent);
+            border-left: 3px solid #c5a880;
+            padding: 2.5rem 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .blank-state p {
+            color: #b0b0b0;
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin: 0;
+            text-align: left;
+        }
+
+        /* Scroll Hint for Snap Layout */
+        .scroll-hint {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #c5a880;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Video Embed */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(197, 168, 128, 0.3);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Custom Scrollbar */
+        section::-webkit-scrollbar { width: 8px; }
+        section::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+        section::-webkit-scrollbar-thumb { background: rgba(197, 168, 128, 0.5); border-radius: 10px; }
+        section::-webkit-scrollbar-thumb:hover { background: rgba(197, 168, 128, 0.8); }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .content-card { padding: 2rem; }
+            h2 { font-size: 2rem; }
+            nav { padding: 15px; flex-wrap: wrap; gap: 10px;}
+            nav button { font-size: 0.75rem; padding: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-system">
+        <div class="bg-image active" id="bg-1" style="background-image: url('https://freerangestock.com/sample/74296/pen-resting-on-notebook-on-table.jpg');"></div>
+        
+        <div class="bg-image" id="bg-text-1" style="background-image: url('https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=1920&auto=format&fit=crop');"></div>
+        <div class="bg-image" id="bg-text-2" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead27d8?q=80&w=1920&auto=format&fit=crop');"></div>
+        <div class="bg-image" id="bg-text-3" style="background-image: url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=1920&auto=format&fit=crop');"></div>
+        
+        <div class="bg-image" id="bg-world" style="background-image: url('https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1920&auto=format&fit=crop');"></div>
+    </div>
+    
+    <div class="bg-overlay"></div>
+
+    <nav>
+        <button class="nav-btn active" data-target="home">Home</button>
+        <button class="nav-btn" data-target="about">About</button>
+        <button class="nav-btn" data-target="portrait">Portrait</button>
+        <button class="nav-btn" data-target="texts">Texts in Focus</button>
+        <button class="nav-btn" data-target="world">Reading the World</button>
+    </nav>
+
+    <div class="section-container">
+        
+        <section id="home" class="active" data-bg="bg-1">
+            <div class="static-padding">
+                <div class="content-card">
+                    <h2>Stephen Ta</h2>
+                    <div class="gold-divider"></div>
+                    <h3 class="entry-title">ENL 003A portfolio</h3>
+                    <p style="text-align: center;">Welcome to my digital writing portfolio. This space documents my academic journey, tracing my evolution as a critical reader and writer throughout the quarter.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" data-bg="bg-1">
+            <div class="static-padding">
+                <div class="content-card">
+                    <h2>About Me</h2>
+                    <div class="gold-divider"></div>
+                    <p>Hi everyone, I'm [Your Name]. I am currently a student navigating my way through this writing course. Outside of the classroom, I devote my time to [insert 1-2 hobbies or interests].</p>
+                    <p>I am looking forward to engaging with all of you this quarter—sharing our diverse perspectives, refining our ideas, and growing collectively as scholars. My primary goal for these coming weeks is to [insert one small goal, e.g., construct more nuanced analytical arguments].</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="portrait" data-bg="bg-1">
+            <div class="static-padding">
+                <div class="content-card">
+                    <h2>Writer's Portrait</h2>
+                    <div class="gold-divider"></div>
+                    <h3 class="entry-title">First Draft: Who Am I as a Reader and Writer?</h3>
+                    <p>As I reflect on where I currently stand as a reader and writer, I see a landscape marked by both enthusiasm and hesitation. Historically, reading has been a deeply immersive experience for me—a mechanism for escape. I effortlessly lose myself in complex narratives and world-building that pull me out of my day-to-day life. However, when transitioning to dense academic texts or lengthy theoretical frameworks, my focus occasionally fragments.</p>
+                    <p>Writing, conversely, is a practice I approach with a volatile blend of creative energy and procrastination. The generative phase comes quite naturally; I genuinely thrive on brainstorming, freewriting, and vocalizing abstract concepts. The true challenge materializes during structural organization. I frequently wrestle with the transition from a conceptual outline to a meticulously structured draft, often becoming stalled by the pursuit of the perfect sentence rather than allowing the ideas to flow.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="texts">
+            
+            <div class="snap-slide" data-bg="bg-text-1">
+                <div class="content-card">
+                    <h2>Texts in Focus</h2>
+                    <div class="gold-divider"></div>
+                    <h3 class="entry-title">Text in Focus #1</h3>
+                    <div class="blank-state">
+                        <p>This space is reserved and will be updated soon.</p>
+                    </div>
+                    <div class="scroll-hint">Scroll down for next text ↓</div>
+                </div>
+            </div>
+
+            <div class="snap-slide" data-bg="bg-text-2">
+                <div class="content-card">
+                    <h2>Texts in Focus</h2>
+                    <div class="gold-divider"></div>
+                    <h3 class="entry-title">Text in Focus #2</h3>
+                    <div class="blank-state">
+                        <p>This space is reserved and will be updated soon.</p>
+                    </div>
+                    <div class="scroll-hint">Scroll down for next text ↓</div>
+                </div>
+            </div>
+
+            <div class="snap-slide" data-bg="bg-text-3">
+                <div class="content-card">
+                    <h2>Texts in Focus</h2>
+                    <div class="gold-divider"></div>
+                    <h3 class="entry-title">Text in Focus #3: Reading & Writing as a Process</h3>
+                    
+                    <p>The most valuable assets that I gained from the two readings are that reading and writing are not just school skills, and that the stereotype that professional writers can write like AI is forever a myth.</p>
+                    
+                    <p>In “Shitty First Drafts,” Anne Lamott explains that strong writing often begins in a weak and messy form. In particular, she says, “Almost all good writing begins with terrible first efforts.” In simple terms, when you first try to draw something in your mind, it may look strange on paper. But that doesn’t mean you are bad at drawing. It only means your idea is still growing. Writing is the same. The first draft is not supposed to be perfect, but it is supposed to help you begin.</p>
+                    
+                    <p>In “How to Read Like a Writer,” Mike Bunn teaches that reading is more than understanding the message. It is also about noticing how the writer built the message. We can ask why the writer chose this word, this example, or this beginning. In that way, reading becomes a kind of quiet conversation between writers and readers.</p>
+                    
+                    <p>What these two readings have in common is that good writing is made step by step. It is not magic. Rather, it is patience, choice, and revision.</p>
+                    
+                    <p>This idea connects to my own writing process. I often feel pressure to make my first draft sound correct right away. But Lamott’s reading reminds me that clear writing usually comes after confusion, that doing horribly on the first draft is actually the key to success in writing.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="world" data-bg="bg-world">
+            <div class="static-padding">
+                <div class="content-card">
+                    <h2>Reading the World</h2>
+                    <div class="gold-divider"></div>
+                    <h3 class="entry-title">Analysis: The Paradox of Devotion and Desire</h3>
+                    
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/XQXZfLbQc3k" title="History of Vietnamese Buddhism" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <p>Siddhartha Gautama abandoned a throne, a palace, and everything else others could only dream of, not because he couldn't have them anymore, but because he understood what they cost. Centuries later, millions kneel before this image and pray for exactly what he walked away from.</p>
+                    
+                    <p>This paradox is what interested me at the center of the video "History of Vietnamese Buddhism" by Spiderum, which features historical contexts, beliefs, and cultural integration of the religion into the society of ancient Vietnam. However, what opens as a historical documentation later turns into an uncomfortable reckoning. The narrator directly argues that Buddhism, a philosophy aiming to eradicate greed, anger, and ignorance, is now going toward them, that the temple, once a place of ego dissolution, is now a marketplace of petitions. They exchanged ritual for wealth and leveraged devotion for secular advantage.</p>
+                    
+                    <p>Furthermore, what makes this critique philosophically devastating is not merely the hypocrisy it exposes, but the deeper meaning it made me think about human nature itself. If a system is designed to save people from desire, is absorbed and manipulated by it, then who is to blame? Was it the practitioners? Or was it desire itself that grew so strong that it became too fundamental to the human condition to be disciplined by any doctrine? Although the video did not answer this question, it did leave room for the audience to sit in and think about it. In my opinion, this is what Siddhartha Gautama would probably do.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const sections = document.querySelectorAll('section');
+            const bgImages = document.querySelectorAll('.bg-image');
+            const snapSlides = document.querySelectorAll('.snap-slide');
+
+            // --- FUNCTION: Change Background ---
+            function changeBackground(targetBgId) {
+                if(!targetBgId) return;
+                bgImages.forEach(img => img.classList.remove('active'));
+                const activeBg = document.getElementById(targetBgId);
+                if(activeBg) activeBg.classList.add('active');
+            }
+
+            // --- INTERSECTION OBSERVER FOR SNAP SLIDES ---
+            // This detects which specific text card you have snapped to inside a tab
+            const observerOptions = {
+                root: null,
+                threshold: 0.5 // Triggers when the slide is halfway on screen
+            };
+
+            const slideObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bgId = entry.target.getAttribute('data-bg');
+                        changeBackground(bgId);
+                    }
+                });
+            }, observerOptions);
+
+            snapSlides.forEach(slide => slideObserver.observe(slide));
+
+            // --- TAB NAVIGATION LOGIC ---
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    
+                    // 1. Get Target Section
+                    const targetId = button.getAttribute('data-target');
+                    const targetSection = document.getElementById(targetId);
+                    
+                    // 2. Manage Button Underline Highlights
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // 3. Manage Visibility
+                    sections.forEach(sec => {
+                        sec.classList.remove('active');
+                        // Reset scroll position to top when hiding a tab
+                        setTimeout(() => { sec.scrollTop = 0; }, 600); 
+                    });
+                    targetSection.classList.add('active');
+
+                    // 4. Determine Initial Background for this tab
+                    let targetBgId = targetSection.getAttribute('data-bg');
+                    
+                    // If the section doesn't have a background (like the #texts tab), 
+                    // grab the background of the first snap slide inside it.
+                    if (!targetBgId) {
+                        const firstSlide = targetSection.querySelector('.snap-slide');
+                        if (firstSlide) targetBgId = firstSlide.getAttribute('data-bg');
+                    }
+
+                    changeBackground(targetBgId);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
