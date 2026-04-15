@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stephen's Portfolio</title>
+    <title>Stephen's portfolio</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
@@ -299,7 +299,8 @@
         <div class="bg-image" id="bg-text-2" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead27d8?q=80&w=1920&auto=format&fit=crop');"></div>
         <div class="bg-image" id="bg-text-3" style="background-image: url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=1920&auto=format&fit=crop');"></div>
         
-        <div class="bg-image" id="bg-world" style="background-image: url('https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1920&auto=format&fit=crop');"></div>
+        <div class="bg-image" id="bg-world-1" style="background-image: url('https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1920&auto=format&fit=crop');"></div>
+        <div class="bg-image" id="bg-world-2" style="background-image: url('https://wallpapercave.com/wp/wp4380957.jpg');"></div>
     </div>
     
     <div class="bg-overlay"></div>
@@ -391,11 +392,11 @@
                     <p>This idea connects to my own writing process. I often feel pressure to make my first draft sound correct right away. But Lamott’s reading reminds me that clear writing usually comes after confusion, that doing horribly on the first draft is actually the key to success in writing.</p>
                 </div>
             </div>
-
         </section>
 
-        <section id="world" data-bg="bg-world">
-            <div class="static-padding">
+        <section id="world">
+            
+            <div class="snap-slide" data-bg="bg-world-1">
                 <div class="content-card">
                     <h2>Reading the World</h2>
                     <div class="gold-divider"></div>
@@ -410,8 +411,29 @@
                     <p>This paradox is what interested me at the center of the video "History of Vietnamese Buddhism" by Spiderum, which features historical contexts, beliefs, and cultural integration of the religion into the society of ancient Vietnam. However, what opens as a historical documentation later turns into an uncomfortable reckoning. The narrator directly argues that Buddhism, a philosophy aiming to eradicate greed, anger, and ignorance, is now going toward them, that the temple, once a place of ego dissolution, is now a marketplace of petitions. They exchanged ritual for wealth and leveraged devotion for secular advantage.</p>
                     
                     <p>Furthermore, what makes this critique philosophically devastating is not merely the hypocrisy it exposes, but the deeper meaning it made me think about human nature itself. If a system is designed to save people from desire, is absorbed and manipulated by it, then who is to blame? Was it the practitioners? Or was it desire itself that grew so strong that it became too fundamental to the human condition to be disciplined by any doctrine? Although the video did not answer this question, it did leave room for the audience to sit in and think about it. In my opinion, this is what Siddhartha Gautama would probably do.</p>
+                    
+                    <div class="scroll-hint">Scroll down for next text ↓</div>
                 </div>
             </div>
+
+            <div class="snap-slide" data-bg="bg-world-2">
+                <div class="content-card">
+                    <h2>Reading the World</h2>
+                    <div class="gold-divider"></div>
+                    <h3 class="entry-title">Analysis: The Evolution of Ego and Greatness</h3>
+                    
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/nk6-TGUe2Sg" title="Cristiano Ronaldo Analysis" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <p>"I see myself as the best footballer in the world. If you don't believe you are the best, then you will never achieve all that you are capable of." This saying changed my whole mindset about how you should think. Previously, I was taught that you should always be humble, even in your thinking. The video deeply resonated with me because it moves beyond mere football statistics to highlight a universal human tension: an arrogant mindset is not necessarily a character flaw, but rather the initial capital required to ignite later greatness. It is the aggressive engine needed to become outstanding.</p>
+                    
+                    <p>Specifically, in the video, the author analysed the career of football legend Cristiano Ronaldo. Besides complex football tactics, the creator reveals this evolution by comparing his flashy youth with his later years. The pivotal evidence isn't a spectacular goal, but the journey of a legendary man, the same one who was once an arrogant, selfish player obsessed with the spotlight, to a humble player who actively stepped down and took part in more build-up roles at the latter part of his career.</p>
+                    
+                    <p>However, when the video moved to the latter part of his career, it completely changed my perspective on his legacy. It proves that a raw ego and a desire to simply show off are only the starting points of a journey. When you reach a certain point of maturity, even the most arrogant man reaches the “equilibrium” of his ego and the humility that comes with age. It taught me that while self-belief is the necessary catalyst, it must pivot toward maximising collective utility. True maturity means utilising that ego to create value and serve a greater purpose, even if it means doing the quiet work away from the spotlight.</p>
+                </div>
+            </div>
+
         </section>
 
     </div>
@@ -472,7 +494,7 @@
                     // 4. Determine Initial Background for this tab
                     let targetBgId = targetSection.getAttribute('data-bg');
                     
-                    // If the section doesn't have a background (like the #texts tab), 
+                    // If the section doesn't have a background, 
                     // grab the background of the first snap slide inside it.
                     if (!targetBgId) {
                         const firstSlide = targetSection.querySelector('.snap-slide');
