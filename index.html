@@ -19,7 +19,6 @@
             font-family: 'Montserrat', sans-serif;
             color: #ffffff;
             background-color: #050505;
-            /* Locks the main website from global scrolling */
             overflow: hidden; 
         }
 
@@ -42,7 +41,7 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 1.2s ease-in-out; /* Smooth crossfade */
+            transition: opacity 1.2s ease-in-out;
         }
 
         .bg-image.active {
@@ -56,7 +55,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.75); /* Dark editorial overlay */
+            background-color: rgba(0, 0, 0, 0.75);
             z-index: -1;
         }
 
@@ -87,7 +86,6 @@
             position: relative;
         }
 
-        /* Animated gold underline for the active tab */
         nav button::after {
             content: '';
             position: absolute;
@@ -108,7 +106,7 @@
             width: 100%;
         }
 
-        /* --- CONTENT SECTIONS (THE APP PAGES) --- */
+        /* --- CONTENT SECTIONS --- */
         .section-container {
             position: relative;
             width: 100vw;
@@ -121,15 +119,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            
-            /* Enable scrolling within the tab */
             overflow-y: auto; 
             overflow-x: hidden;
-            
-            /* CRITICAL: CSS Scroll Snapping Settings */
             scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
-            
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
@@ -149,21 +142,26 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center; /* Centers short content vertically */
+            align-items: center; 
         }
 
-        /* The Scroll Snap Container (Locks onto the screen) */
+        .essay-padding {
+            padding: 120px 20px 100px 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* The Scroll Snap Container */
         .snap-slide {
             width: 100%;
-            min-height: 100vh; /* Forces the slide to take up the full screen */
+            min-height: 100vh; 
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 120px 20px 60px 20px; /* Accounts for nav bar */
-            
-            /* CRITICAL: Tells the browser to magnetize to the center of this div */
+            padding: 120px 20px 60px 20px; 
             scroll-snap-align: center;
-            scroll-snap-stop: always; /* Forces it to stop, preventing skipping past it */
+            scroll-snap-stop: always; 
         }
 
         /* Glassmorphism Reading Cards */
@@ -177,14 +175,18 @@
             border-radius: 12px;
             padding: 4rem;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            
-            /* Slide up animation state */
             transform: translateY(20px);
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         section.active .content-card {
             transform: translateY(0);
+        }
+
+        /* Extended Card for Full Essays */
+        .essay-card {
+            max-width: 900px;
+            padding: 5rem;
         }
 
         /* Typography */
@@ -199,7 +201,7 @@
         h3.entry-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
-            color: #c5a880; /* Gold Accent */
+            color: #c5a880; 
             font-style: italic;
             margin-bottom: 2rem;
             text-align: center;
@@ -213,6 +215,66 @@
             margin-bottom: 1.5rem;
         }
 
+        /* Drop Cap for Essays */
+        .drop-cap::first-letter {
+            float: left;
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 3px;
+            color: #c5a880;
+        }
+
+        /* Fancy Poetry Blockquote */
+        .poetry-quote {
+            position: relative;
+            background: linear-gradient(135deg, rgba(197, 168, 128, 0.05), rgba(0,0,0,0.2));
+            border-left: 3px solid #c5a880;
+            padding: 2.5rem 3rem;
+            margin: 3rem 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            line-height: 1.9;
+            color: #e8dcc7;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .poetry-quote::before {
+            content: '\201C';
+            position: absolute;
+            top: -20px;
+            left: 15px;
+            font-size: 6rem;
+            color: rgba(197, 168, 128, 0.15);
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .poetry-line {
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .poetry-line.indent {
+            padding-left: 2rem;
+        }
+
+        /* Image Replicated Highlights */
+        .hl-pink {
+            border-bottom: 3px solid #ff9eaf;
+            padding-bottom: 1px;
+        }
+        
+        .hl-blue {
+            border-bottom: 3px solid #82baff;
+            padding-bottom: 1px;
+        }
+
         /* Decorative Elements */
         .gold-divider {
             width: 60px;
@@ -221,7 +283,6 @@
             margin: 0 auto 2rem auto;
         }
 
-        /* Elegant Blank States */
         .blank-state {
             background: linear-gradient(to right, rgba(197, 168, 128, 0.05), transparent);
             border-left: 3px solid #c5a880;
@@ -238,7 +299,6 @@
             text-align: left;
         }
 
-        /* Scroll Hint for Snap Layout */
         .scroll-hint {
             text-align: center;
             margin-top: 2rem;
@@ -257,7 +317,7 @@
         /* Video Embed */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%; 
             height: 0;
             overflow: hidden;
             border-radius: 8px;
@@ -282,7 +342,7 @@
 
         /* Mobile Adjustments */
         @media (max-width: 768px) {
-            .content-card { padding: 2rem; }
+            .content-card, .essay-card { padding: 2rem; }
             h2 { font-size: 2rem; }
             nav { padding: 15px; flex-wrap: wrap; gap: 10px;}
             nav button { font-size: 0.75rem; padding: 5px; }
@@ -300,6 +360,8 @@
         
         <div class="bg-image" id="bg-world-1" style="background-image: url('https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1920&auto=format&fit=crop');"></div>
         <div class="bg-image" id="bg-world-2" style="background-image: url('https://wallpapercave.com/wp/wp4380957.jpg');"></div>
+        
+        <div class="bg-image" id="bg-essay-1" style="background-image: url('https://images.unsplash.com/photo-1478147424096-41f22822ce04?q=80&w=1920&auto=format&fit=crop');"></div>
     </div>
     
     <div class="bg-overlay"></div>
@@ -310,6 +372,7 @@
         <button class="nav-btn" data-target="portrait">Portrait</button>
         <button class="nav-btn" data-target="texts">Texts in Focus</button>
         <button class="nav-btn" data-target="world">Reading the World</button>
+        <button class="nav-btn" data-target="essays">Essays</button>
     </nav>
 
     <div class="section-container">
@@ -320,7 +383,7 @@
                     <h2>Stephen Ta</h2>
                     <div class="gold-divider"></div>
                     <h3 class="entry-title">ENL 003A portfolio</h3>
-                    <p style="text-align: center;">Welcome to my  writing portfolio. This space documents my academic journey in ENL 003 class throughout the quarter.</p>
+                    <p style="text-align: center;">Welcome to my digital writing portfolio. This space documents my academic journey, tracing my evolution as a critical reader and writer throughout the quarter.</p>
                 </div>
             </div>
         </section>
@@ -330,8 +393,8 @@
                 <div class="content-card">
                     <h2>About Me</h2>
                     <div class="gold-divider"></div>
-                    <p>Hi everyone, I'm Stephen Ta. I am currently a first-year international student from Vietnam. Outside of class, I love to play badminton, FIFA, and watch some K-drama too.</p>
-                    <p>P/S: I'm not aware that this is an upper div class. I might be cooked.</p>
+                    <p>Hi everyone, I'm [Your Name]. I am currently a student navigating my way through this writing course. Outside of the classroom, I devote my time to [insert 1-2 hobbies or interests].</p>
+                    <p>I am looking forward to engaging with all of you this quarter—sharing our diverse perspectives, refining our ideas, and growing collectively as scholars. My primary goal for these coming weeks is to [insert one small goal, e.g., construct more nuanced analytical arguments].</p>
                 </div>
             </div>
         </section>
@@ -342,14 +405,13 @@
                     <h2>Writer's Portrait</h2>
                     <div class="gold-divider"></div>
                     <h3 class="entry-title">First Draft: Who Am I as a Reader and Writer?</h3>
-                    <p>Reading and writing has always been a crucial part of my academic journey. However,  I think I don’t have a good relationship with it. During my 12 years in school, literature writing has always been my weakpoint. Apart from the fact that reading always go with writing, I love reading more, and also resonate with it more</p>
-                    <p></p>
+                    <p>As I reflect on where I currently stand as a reader and writer, I see a landscape marked by both enthusiasm and hesitation. Historically, reading has been a deeply immersive experience for me—a mechanism for escape. I effortlessly lose myself in complex narratives and world-building that pull me out of my day-to-day life. However, when transitioning to dense academic texts or lengthy theoretical frameworks, my focus occasionally fragments.</p>
+                    <p>Writing, conversely, is a practice I approach with a volatile blend of creative energy and procrastination. The generative phase comes quite naturally; I genuinely thrive on brainstorming, freewriting, and vocalizing abstract concepts. The true challenge materializes during structural organization. I frequently wrestle with the transition from a conceptual outline to a meticulously structured draft, often becoming stalled by the pursuit of the perfect sentence rather than allowing the ideas to flow.</p>
                 </div>
             </div>
         </section>
 
         <section id="texts">
-            
             <div class="snap-slide" data-bg="bg-text-1">
                 <div class="content-card">
                     <h2>Texts in Focus</h2>
@@ -379,38 +441,27 @@
                     <h2>Texts in Focus</h2>
                     <div class="gold-divider"></div>
                     <h3 class="entry-title">Text in Focus #3: Reading & Writing as a Process</h3>
-                    
                     <p>The most valuable assets that I gained from the two readings are that reading and writing are not just school skills, and that the stereotype that professional writers can write like AI is forever a myth.</p>
-                    
                     <p>In “Shitty First Drafts,” Anne Lamott explains that strong writing often begins in a weak and messy form. In particular, she says, “Almost all good writing begins with terrible first efforts.” In simple terms, when you first try to draw something in your mind, it may look strange on paper. But that doesn’t mean you are bad at drawing. It only means your idea is still growing. Writing is the same. The first draft is not supposed to be perfect, but it is supposed to help you begin.</p>
-                    
                     <p>In “How to Read Like a Writer,” Mike Bunn teaches that reading is more than understanding the message. It is also about noticing how the writer built the message. We can ask why the writer chose this word, this example, or this beginning. In that way, reading becomes a kind of quiet conversation between writers and readers.</p>
-                    
                     <p>What these two readings have in common is that good writing is made step by step. It is not magic. Rather, it is patience, choice, and revision.</p>
-                    
                     <p>This idea connects to my own writing process. I often feel pressure to make my first draft sound correct right away. But Lamott’s reading reminds me that clear writing usually comes after confusion, that doing horribly on the first draft is actually the key to success in writing.</p>
                 </div>
             </div>
         </section>
 
         <section id="world">
-            
             <div class="snap-slide" data-bg="bg-world-1">
                 <div class="content-card">
                     <h2>Reading the World</h2>
                     <div class="gold-divider"></div>
                     <h3 class="entry-title">Analysis: The Paradox of Devotion and Desire</h3>
-                    
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/XQXZfLbQc3k" title="History of Vietnamese Buddhism" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-
                     <p>Siddhartha Gautama abandoned a throne, a palace, and everything else others could only dream of, not because he couldn't have them anymore, but because he understood what they cost. Centuries later, millions kneel before this image and pray for exactly what he walked away from.</p>
-                    
                     <p>This paradox is what interested me at the center of the video "History of Vietnamese Buddhism" by Spiderum, which features historical contexts, beliefs, and cultural integration of the religion into the society of ancient Vietnam. However, what opens as a historical documentation later turns into an uncomfortable reckoning. The narrator directly argues that Buddhism, a philosophy aiming to eradicate greed, anger, and ignorance, is now going toward them, that the temple, once a place of ego dissolution, is now a marketplace of petitions. They exchanged ritual for wealth and leveraged devotion for secular advantage.</p>
-                    
                     <p>Furthermore, what makes this critique philosophically devastating is not merely the hypocrisy it exposes, but the deeper meaning it made me think about human nature itself. If a system is designed to save people from desire, is absorbed and manipulated by it, then who is to blame? Was it the practitioners? Or was it desire itself that grew so strong that it became too fundamental to the human condition to be disciplined by any doctrine? Although the video did not answer this question, it did leave room for the audience to sit in and think about it. In my opinion, this is what Siddhartha Gautama would probably do.</p>
-                    
                     <div class="scroll-hint">Scroll down for next text ↓</div>
                 </div>
             </div>
@@ -420,21 +471,83 @@
                     <h2>Reading the World</h2>
                     <div class="gold-divider"></div>
                     <h3 class="entry-title">Analysis: The Evolution of Ego and Greatness</h3>
-                    
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/nk6-TGUe2Sg" title="Cristiano Ronaldo Analysis" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
-
-                    <p>"I see myself as the best footballer in the world. If you don't believe you are the best, then you will never achieve all that you are capable of." </p>
-                    
-                    <p>This saying changed my whole mindset about how you should think. Previously, I was taught that you should always be humble, even in your thinking. The video deeply resonated with me because it moves beyond mere football statistics to highlight a universal human tension: an arrogant mindset is not necessarily a character flaw, but rather the initial capital required to ignite later greatness. It is the aggressive engine needed to become outstanding.</p>
-
+                    <p>"I see myself as the best footballer in the world. If you don't believe you are the best, then you will never achieve all that you are capable of." This saying changed my whole mindset about how you should think. Previously, I was taught that you should always be humble, even in your thinking. The video deeply resonated with me because it moves beyond mere football statistics to highlight a universal human tension: an arrogant mindset is not necessarily a character flaw, but rather the initial capital required to ignite later greatness. It is the aggressive engine needed to become outstanding.</p>
                     <p>Specifically, in the video, the author analysed the career of football legend Cristiano Ronaldo. Besides complex football tactics, the creator reveals this evolution by comparing his flashy youth with his later years. The pivotal evidence isn't a spectacular goal, but the journey of a legendary man, the same one who was once an arrogant, selfish player obsessed with the spotlight, to a humble player who actively stepped down and took part in more build-up roles at the latter part of his career.</p>
-                    
                     <p>However, when the video moved to the latter part of his career, it completely changed my perspective on his legacy. It proves that a raw ego and a desire to simply show off are only the starting points of a journey. When you reach a certain point of maturity, even the most arrogant man reaches the “equilibrium” of his ego and the humility that comes with age. It taught me that while self-belief is the necessary catalyst, it must pivot toward maximising collective utility. True maturity means utilising that ego to create value and serve a greater purpose, even if it means doing the quiet work away from the spotlight.</p>
                 </div>
             </div>
+        </section>
 
+        <section id="essays" data-bg="bg-essay-1">
+            <div class="essay-padding">
+                <div class="content-card essay-card">
+                    <h2>Essay 1</h2>
+                    <div class="gold-divider"></div>
+                    <h3 class="entry-title">First Draft: The Enduring Rhythm of Maya Angelou</h3>
+                    
+                    <p class="drop-cap">To be honest, when I first read Maya Angelou’s poetry, I didn’t like it. For me, it feels sloppy, forced, unlike the poems written in Eastern Asian language, which gives off a luxurious feeling when being read. However, as time passed, my appreciation for her work grew exponentially. I realised what her works truly about. They are to be felt, heard, and experienced. Rooted deeply in the African American spirituals and blues traditions, her work utilizes the rhythm of oral performance to navigate the hardships of oppression, carrying a message of survival.</p> 
+                    
+                    <p>To fully appreciate her work, one must bring themself back to the 1970s Black Feminist movement. In 1977, the Combahee River Collective published a landmark statement defining a philosophy that recognized the links between race, class, and sex oppression. Published just a year later in 1978, Angelou’s seminal poem "Still I Rise" functions as a poetic embodiment of this philosophy, insisting on the inherent value and specific liberation of Black women. While casual readers often praise Angelou for the qualities of her verse, a closer reading reveals a higher, more sophisticated use of meter, metaphor, and symbolism. My favorite example for that is the masterpiece "Still I Rise" and "Caged Bird" (1983), as through them we can better understand how Angelou constructs her universal anthems of empowerment, subverting oppressive expectations and restoring cultural identity.</p>
+
+                    <p>In "Still I Rise," Angelou’s speaker is a Black woman who wants to assert her strength in the face of an oppressive, racist society. To build this tone of joyful defiance, Angelou relies heavily on structural choices, particularly her mastery of meter. The poem's underlying rhythm is trochaic tetrameter, meaning the lines generally consist of four metrical feet known as trochees, which is one stressed syllable followed by an unstressed one. This is most evident when the speaker asks:</p>
+
+                    <div class="poetry-quote">
+                        <span class="poetry-line">Does my sassiness upset you?</span>
+                        <span class="poetry-line">Why are you beset with gloom?</span>
+                        <span class="poetry-line">'Cause I walk like I've got oil wells</span>
+                        <span class="poetry-line"><span class="hl-pink">Pumping</span> in my living room.</span>
+                    </div>
+
+                    <p>As this stanza demonstrates, Angelou manipulates the rhythm by dropping the final unstressed syllable in the second and fourth lines—a technique known as a catalectic line. This missing syllable forces a natural pause that creates a rhythmic, swinging momentum, giving the reader the auditory illusion of the speaker’s confident, strutting walk.</p>
+
+                    <p>Furthermore, Angelou deliberately breaks this trochaic pattern to emphasize moments of sheer resistance. In the opening stanza, the meter suddenly shifts to iambs in a shorter, three-foot line: "But still, like dust, I'll rise". The use of the simile comparing the speaker to dust is profoundly symbolic. On a surface level, dust floats upward when stomped on, mirroring the speaker's refusal to be crushed. However, dust is also an irritant; by rising, the speaker actively disrupts and aggravates the very oppressive systems trying to suppress her. Additionally, the simile of "like dust" echoes the Biblical fashioning of humanity from the earth in Genesis, framing the speaker's rise as a reclamation of the very first human narrative.</p>
+
+                    <h3 class="entry-title" style="margin-top: 3rem; font-size: 1.2rem;">Anaphora, Dactyls, and the Expanding Self</h3>
+                    
+                    <p>As "Still I Rise" progresses, Angelou employs enjambment and anaphora to accelerate the poem's emotional intensity. The anaphoric sequence of rhetorical questions ("You may shoot me...", "You may cut me...", "You may kill me...") highlights the relentless nature of institutional and interpersonal violence. Angelou suggests that violence is not always physical; historical and verbal erasure, enacted through "bitter, twisted lies," functions as a severe form of subjugation. In this sense, the oppressor's emotions and words are weaponized. As cognitive linguistics identifies, Angelou uses a structural metaphor mapping "emotion is implement," turning hatred and lies into sharp, destructive tools.</p>
+
+                    <p>To counter this onslaught, the poem’s rhythm breaks free from its initial constraints. In the later stanzas, Angelou shifts into a galloping dactylic rhythm (metrical feet consisting of one stressed syllable followed by two unstressed syllables).</p>
+
+                    <div class="poetry-quote">
+                        <span class="poetry-line">Out of the huts of history's <span class="hl-pink">shame</span> I rise</span>
+                        <span class="poetry-line"><span class="hl-blue">Up</span> from a past that's rooted in <span class="hl-pink">pain</span> I rise</span>
+                    </div>
+
+                    <p>This shift reflects an expanding sense of self, further emphasized by the recurring, standalone refrain, "I rise". Here, the speaker likens herself to an ocean: "I'm a black ocean, leaping and wide, / Welling and swelling I bear in the tide". The ocean metaphor operates on multiple levels. Historically, it invokes the Middle Passage and the trauma of the transatlantic slave trade. Personally and collectively, however, it is a symbol of feminine reproduction and birth, capturing a tide that is "welling and swelling" to bring forth a new, liberated reality. The galloping meter combined with this oceanic imagery signifies the speaker's unstoppable momentum.</p>
+
+                    <h3 class="entry-title" style="margin-top: 3rem; font-size: 1.2rem;">Metaphorical Confinement in "Caged Bird"</h3>
+                    
+                    <p>While "Still I Rise" utilizes auditory defiance and galloping dactylic momentum to outwardly reject oppression, "Caged Bird" pivots to stark visual juxtapositions and conceptual metaphors to explore the internal, psychological realities of discrimination. The poem sets up a profound contrast between the "free bird" and the "caged bird," illustrating the stark racial inequalities between white and African American experiences during the civil rights era.</p>
+
+                    <p>To convey the suffocating nature of this oppression, Angelou employs rich structural metaphors. Consider the second stanza:</p>
+
+                    <div class="poetry-quote">
+                        <span class="poetry-line">But a bird that stalks down his narrow cage</span>
+                        <span class="poetry-line">can seldom see through his bars of rage</span>
+                        <span class="poetry-line"><span class="hl-pink">his</span> wings are clipped <span class="hl-pink">and</span> his feet are <span class="hl-pink">tied</span></span>
+                        <span class="poetry-line">so he opens his throat to sing.</span>
+                    </div>
+
+                    <p>Here, Angelou uses the phrase "bars of rage" to perform a metaphorical mapping, projecting the abstract concept of human emotion onto the physical, concrete barrier of a cage. The emotion itself becomes the blinding prison. Furthermore, Angelou utilizes orientational metaphors in the phrase "stalks down his narrow cage". The spatial orientation of "down" carries a negative evaluation of human emotion, mapping the physical environment of the bird onto feelings of depression and systemic mistreatment. By stripping the bird of its physical mobility, the poem emphasizes that the bird's only remaining agency is its voice. Singing becomes an act of knowing and yearning for freedom; through the structural metaphor mapping "singing is knowing," the song transforms into a mechanism of survival.</p>
+
+                    <h3 class="entry-title" style="margin-top: 3rem; font-size: 1.2rem;">The Physical Body as a Site of Empowerment</h3>
+                    
+                    <p>The reclamation of voice in "Caged Bird" is closely tied to the reclamation of the physical body, a theme Angelou triumphantly realizes in poems like "Phenomenal Woman." In "Phenomenal Woman," Angelou subverts traditional, Eurocentric standards of beauty, insisting that a Black woman's power and allure stem from her confidence, inner strength, and unapologetic physical presence. This bodily pride is equally visible in "Still I Rise," where the speaker defiantly asks, "Does my sexiness upset you?" and rejoices in the "diamonds at the meeting of my thighs".</p>
+
+                    <p>Angelou brilliantly counters societal attempts to decompose and demean the Black female body. The oppressor demands a "broken" figure with "bowed head and lowered eyes," visually deconstructing the woman into subjugated parts. However, Angelou utilizes phonetic cohesion—such as the repeated 'o' vowel sounds in "broken," "bowed," and "lowered"—to organically bind the speaker's identity back together, proving her spirit remains whole despite hostile external forces. Through this synthesis of form and meaning, the Black female body is transformed from a site of historical trauma into an indomitable source of gold mines and oil wells.</p>
+
+                    <h3 class="entry-title" style="margin-top: 3rem; font-size: 1.2rem;">Conclusion: Reclaiming History and Broader Sociological Themes</h3>
+                    
+                    <p>When read collectively, "Still I Rise," "Caged Bird," and "Phenomenal Woman" reveal the core of Angelou’s poetic project: the defiance of oppressive social expectations and the reclamation of marginalized history. Angelou’s speakers categorically refuse to remain bound to "a past that's rooted in pain". Her poetry performs a critical discursive intervention, challenging hegemonic narratives and recovering cultural and political space for those who have been historically silenced.</p>
+
+                    <p>From a sociological perspective, Angelou’s work serves profound functional and symbolic purposes. Conflict theorists would view her poetry as a representation of the struggle between oppressed and oppressor, highlighting the tension and exploitation inherent in systemic inequality. Meanwhile, functionalists would recognize her poetry as a crucial tool for social cohesion, where resilience functions to help communities adapt, persevere, and maintain stability amidst societal dysfunction.</p>
+
+                    <p>This functional resilience is precisely why Angelou’s poetry has found immense utility outside the literary realm, serving as a therapeutic resource in clinical settings. Her vivid imagery and themes of empowerment are actively used to accompany cancer survivors through their recovery, fostering emotional processing, self-affirmation, and psychological healing. Ultimately, Maya Angelou’s poetry matters because it masterfully translates the specific, historical traumas of the marginalized into universal declarations of hope. Through her calculated use of rhythm, sound, and metaphor, she ensures that no matter how narrow the cage or bitter the history, the song of freedom will always rise.</p>
+                </div>
+            </div>
         </section>
 
     </div>
@@ -446,7 +559,6 @@
             const bgImages = document.querySelectorAll('.bg-image');
             const snapSlides = document.querySelectorAll('.snap-slide');
 
-            // --- FUNCTION: Change Background ---
             function changeBackground(targetBgId) {
                 if(!targetBgId) return;
                 bgImages.forEach(img => img.classList.remove('active'));
@@ -454,11 +566,9 @@
                 if(activeBg) activeBg.classList.add('active');
             }
 
-            // --- INTERSECTION OBSERVER FOR SNAP SLIDES ---
-            // This detects which specific text card you have snapped to inside a tab
             const observerOptions = {
                 root: null,
-                threshold: 0.5 // Triggers when the slide is halfway on screen
+                threshold: 0.5 
             };
 
             const slideObserver = new IntersectionObserver((entries) => {
@@ -472,31 +582,23 @@
 
             snapSlides.forEach(slide => slideObserver.observe(slide));
 
-            // --- TAB NAVIGATION LOGIC ---
             navButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     
-                    // 1. Get Target Section
                     const targetId = button.getAttribute('data-target');
                     const targetSection = document.getElementById(targetId);
                     
-                    // 2. Manage Button Underline Highlights
                     navButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
 
-                    // 3. Manage Visibility
                     sections.forEach(sec => {
                         sec.classList.remove('active');
-                        // Reset scroll position to top when hiding a tab
                         setTimeout(() => { sec.scrollTop = 0; }, 600); 
                     });
                     targetSection.classList.add('active');
 
-                    // 4. Determine Initial Background for this tab
                     let targetBgId = targetSection.getAttribute('data-bg');
                     
-                    // If the section doesn't have a background, 
-                    // grab the background of the first snap slide inside it.
                     if (!targetBgId) {
                         const firstSlide = targetSection.querySelector('.snap-slide');
                         if (firstSlide) targetBgId = firstSlide.getAttribute('data-bg');
