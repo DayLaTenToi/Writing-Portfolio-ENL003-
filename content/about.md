@@ -1,0 +1,3 @@
+Hi everyone, I'm [Your Name]. I am currently a student navigating my way through this writing course. Outside of the classroom, I devote my time to [insert 1-2 hobbies or interests].
+
+I am looking forward to engaging with all of you this quarter—sharing our diverse perspectives, refining our ideas, and growing collectively as scholars. My primary goal for these coming weeks is to [insert one small goal, e.g., construct more nuanced analytical arguments].
