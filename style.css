@@ -1,0 +1,337 @@
+/* Base Reset & Typography */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    background-color: #050505;
+    overflow: hidden; 
+}
+
+/* --- BACKGROUND SYSTEM --- */
+.bg-system {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+}
+
+.bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+}
+
+.bg-image.active {
+    opacity: 1;
+}
+
+/* The Black Overlay */
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: -1;
+}
+
+/* --- NAVIGATION --- */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 25px 40px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0));
+    z-index: 100;
+}
+
+nav button {
+    background: none;
+    border: none;
+    color: #d1d1d1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+nav button::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #c5a880;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+nav button:hover, nav button.active {
+    color: #c5a880;
+}
+
+nav button.active::after {
+    width: 100%;
+}
+
+/* --- CONTENT SECTIONS --- */
+.section-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;
+    z-index: 10;
+}
+
+section.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 20;
+}
+
+.static-padding {
+    padding: 120px 20px 60px 20px;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.essay-padding {
+    padding: 120px 20px 100px 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.snap-slide {
+    width: 100%;
+    min-height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 20px 60px 20px; 
+    scroll-snap-align: center;
+    scroll-snap-stop: always; 
+}
+
+/* Glassmorphism Reading Cards */
+.content-card {
+    max-width: 800px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 4rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    transform: translateY(20px);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+section.active .content-card {
+    transform: translateY(0);
+}
+
+.essay-card {
+    max-width: 900px;
+    padding: 5rem;
+}
+
+/* Typography */
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+h3.entry-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #c5a880; 
+    font-style: italic;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 400;
+}
+
+/* Markdown Parsed Elements */
+.md-content p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #e0e0e0;
+    margin-bottom: 1.5rem;
+}
+
+.md-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Drop Cap for Essays */
+.drop-cap::first-letter {
+    float: left;
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    line-height: 0.8;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-left: 3px;
+    color: #c5a880;
+}
+
+/* Fancy Poetry Blockquote */
+.poetry-quote {
+    position: relative;
+    background: linear-gradient(135deg, rgba(197, 168, 128, 0.05), rgba(0,0,0,0.2));
+    border-left: 3px solid #c5a880;
+    padding: 2.5rem 3rem;
+    margin: 3rem 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    line-height: 1.9;
+    color: #e8dcc7;
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.poetry-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: -20px;
+    left: 15px;
+    font-size: 6rem;
+    color: rgba(197, 168, 128, 0.15);
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.poetry-line {
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.hl-pink {
+    border-bottom: 3px solid #ff9eaf;
+    padding-bottom: 1px;
+}
+
+.hl-blue {
+    border-bottom: 3px solid #82baff;
+    padding-bottom: 1px;
+}
+
+.gold-divider {
+    width: 60px;
+    height: 2px;
+    background-color: #c5a880;
+    margin: 0 auto 2rem auto;
+}
+
+.blank-state {
+    background: linear-gradient(to right, rgba(197, 168, 128, 0.05), transparent);
+    border-left: 3px solid #c5a880;
+    padding: 2.5rem 2rem;
+    border-radius: 0 8px 8px 0;
+}
+
+.blank-state p {
+    color: #b0b0b0;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin: 0;
+    text-align: left;
+}
+
+.scroll-hint {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: #c5a880;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; 
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(197, 168, 128, 0.3);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Custom Scrollbar */
+section::-webkit-scrollbar { width: 8px; }
+section::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+section::-webkit-scrollbar-thumb { background: rgba(197, 168, 128, 0.5); border-radius: 10px; }
+section::-webkit-scrollbar-thumb:hover { background: rgba(197, 168, 128, 0.8); }
+
+@media (max-width: 768px) {
+    .content-card, .essay-card { padding: 2rem; }
+    h2 { font-size: 2rem; }
+    nav { padding: 15px; flex-wrap: wrap; gap: 10px;}
+    nav button { font-size: 0.75rem; padding: 5px; }
+}
