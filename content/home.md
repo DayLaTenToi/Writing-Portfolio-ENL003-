@@ -1,1 +1,1 @@
-<p style="text-align: center;">Welcome to my digital writing portfolio. This space documents my academic journey, tracing my evolution as a critical reader and writer throughout the quarter.</p>
+<p style="text-align: center;">Quack Quack.</p>
