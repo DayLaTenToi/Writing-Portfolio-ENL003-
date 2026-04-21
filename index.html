@@ -72,7 +72,9 @@
                     <h2>Texts in Focus</h2>
                     <div class="gold-divider"></div>
                     <h3 class="entry-title">Text in Focus #1</h3>
-                    <div class="md-content" data-file="content/text1.md"></div>
+                    <div class="blank-state">
+                        <div class="md-content" data-file="content/text1.md"></div>
+                    </div>
                     <div class="scroll-hint">Scroll down for next text ↓</div>
                 </div>
             </div>
@@ -82,7 +84,9 @@
                     <h2>Texts in Focus</h2>
                     <div class="gold-divider"></div>
                     <h3 class="entry-title">Text in Focus #2</h3>
-                    <div class="md-content" data-file="content/text2.md"></div>
+                    <div class="blank-state">
+                        <div class="md-content" data-file="content/text2.md"></div>
+                    </div>
                     <div class="scroll-hint">Scroll down for next text ↓</div>
                 </div>
             </div>
@@ -140,7 +144,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- 1. Fetch and Parse Markdown ---
+            // Tell Marked.js to respect single line breaks in markdown
+            marked.use({ breaks: true });
+            
+            // 1. Fetch and Parse Markdown
             const mdContainers = document.querySelectorAll('.md-content');
             mdContainers.forEach(container => {
                 const file = container.getAttribute('data-file');
@@ -157,7 +164,7 @@
                     });
             });
 
-            // --- 2. Interface Navigation & Snapping Logic ---
+            // 2. Interface Navigation & Snapping Logic
             const navButtons = document.querySelectorAll('.nav-btn');
             const sections = document.querySelectorAll('section');
             const bgImages = document.querySelectorAll('.bg-image');
