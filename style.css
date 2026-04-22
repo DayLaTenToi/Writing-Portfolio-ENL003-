@@ -335,3 +335,103 @@ section::-webkit-scrollbar-thumb:hover { background: rgba(197, 168, 128, 0.8); }
     nav { padding: 15px; flex-wrap: wrap; gap: 10px;}
     nav button { font-size: 0.75rem; padding: 5px; }
 }
+
+/* --- INLINE COMMENTS SYSTEM --- */
+.comment-wrapper {
+    position: relative;
+    display: inline;
+    cursor: help;
+}
+
+/* The highlighted text in the essay */
+.comment-highlight {
+    background-color: rgba(197, 168, 128, 0.15);
+    border-bottom: 2px dashed #c5a880;
+    border-radius: 3px;
+    padding: 0 2px;
+    transition: all 0.3s ease;
+}
+
+.comment-wrapper:hover .comment-highlight {
+    background-color: rgba(197, 168, 128, 0.4);
+}
+
+/* The popup comment card */
+.comment-box {
+    position: absolute;
+    bottom: 130%; 
+    left: 50%;
+    transform: translateX(-50%) translateY(15px);
+    width: 300px;
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(197, 168, 128, 0.4);
+    border-radius: 12px;
+    padding: 15px 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 100;
+    pointer-events: none; /* Prevents cursor flickering */
+    text-align: left;
+}
+
+/* The little arrow pointing down to the text */
+.comment-box::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px;
+    border-style: solid;
+    border-color: rgba(197, 168, 128, 0.4) transparent transparent transparent;
+}
+
+/* Show the comment on hover */
+.comment-wrapper:hover .comment-box {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Inside the comment card */
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+}
+
+.comment-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #c5a880;
+    color: #050505;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.comment-author {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 0.9rem;
+}
+
+.comment-text {
+    font-family: 'Montserrat', sans-serif;
+    display: block;
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
