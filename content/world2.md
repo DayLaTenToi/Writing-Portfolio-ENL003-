@@ -1,9 +1,3 @@
-<h3 class="entry-title">Analysis: The Evolution of Ego and Greatness</h3>
-
-<div class="video-container">
-    <iframe src="https://www.youtube.com/embed/nk6-TGUe2Sg" title="Cristiano Ronaldo Analysis" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
 "I see myself as the best footballer in the world. If you don't believe you are the best, then you will never achieve all that you are capable of." 
 This saying changed my whole mindset about how you should think. Previously, I was taught that you should always be humble, even in your thinking. The video deeply resonated with me because it moves beyond mere football statistics to highlight a universal human tension: an arrogant mindset is not necessarily a character flaw, but rather the initial capital required to ignite later greatness. It is the aggressive engine needed to become outstanding.
 
