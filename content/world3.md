@@ -1,9 +1,3 @@
-<h3 class="entry-title">Analysis: The Duality of Language and History</h3>
-
-<div class="video-container">
-    <iframe src="https://www.youtube.com/embed/nJvL5G0ZJvQ" title="History of the N-Word Analysis" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
 Words, just like chemical compounds, can either heal or destroy depending on who uses them. In the YouTube video, the creator looks at the long history of the N-word. It shows how a word first used by white slave owners to treat Black people like property was later taken back by the Black community after the Civil Rights movement in the 1960s.
 
 The main argument here is the fight between old pain and cultural pride. A key part of the video explains a small sound change: the move from the hard "-er" ending, which is linked to hate and violence, to the softer "-a" ending used in slang. By changing that one sound, the community turned a mean insult into a sign of friendship and moreover, survival.
