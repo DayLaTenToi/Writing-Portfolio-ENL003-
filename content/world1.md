@@ -1,3 +1,9 @@
+<h3 class="entry-title">Analysis: The Paradox of Devotion and Desire</h3>
+
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/XQXZfLbQc3k" title="History of Vietnamese Buddhism" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
 Siddhartha Gautama abandoned a throne, a palace, and everything else others could only dream of, not because he couldn't have them anymore, but because he understood what they cost. Centuries later, millions kneel before this image and pray for exactly what he walked away from.
 
 This paradox is what interested me at the center of the video "History of Vietnamese Buddhism" by Spiderum, which features historical contexts, beliefs, and cultural integration of the religion into the society of ancient Vietnam. However, what opens as a historical documentation later turns into an uncomfortable reckoning. The narrator directly argues that Buddhism, a philosophy aiming to eradicate greed, anger, and ignorance, is now going toward them, that the temple, once a place of ego dissolution, is now a marketplace of petitions. They exchanged ritual for wealth and leveraged devotion for secular advantage.
