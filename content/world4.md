@@ -1,9 +1,3 @@
-<h3 class="entry-title">Analysis: The Hidden Machinery of Apple</h3>
-
-<div class="video-container">
-    <iframe src="https://www.youtube.com/embed/MMHX1aYtLUQ" title="Tim Cook Apple Analysis" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
 As someone born in 2007, I grew up with Apple products under Tim Cook. I recently watched a YouTube video about how he turned Apple into a 4 trillion dollar company.
 
 The video basically tells his story from an admiring point of view, mixing history with business talk. It shows Cook not as a flashy creator like Steve Jobs but as a very disciplined and practical manager.
