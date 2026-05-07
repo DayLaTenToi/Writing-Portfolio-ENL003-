@@ -16,7 +16,7 @@
         <div class="bg-image" id="bg-text-1" style="background-image: url('https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=1920&auto=format&fit=crop');"></div>
         <div class="bg-image" id="bg-text-2" style="background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead27d8?q=80&w=1920&auto=format&fit=crop');"></div>
         <div class="bg-image" id="bg-text-3" style="background-image: url('https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=1920&auto=format&fit=crop');"></div>
-        <div class="bg-image" id="bg-text-4" style="background-image: url('https://cdn.britannica.com/88/244188-050-F66D3342/Toni-Morrison-1993.jpg');"></div>
+        <div class="bg-image" id="bg-text-4" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/8c/Toni_Morrison_2008-2.jpg');"></div>
         <div class="bg-image" id="bg-world-1" style="background-image: url('https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1920&auto=format&fit=crop');"></div>
         <div class="bg-image" id="bg-world-2" style="background-image: url('https://wallpapercave.com/wp/wp4380957.jpg');"></div>
         <div class="bg-image" id="bg-world-3" style="background-image: url('https://cdn.britannica.com/41/147441-050-AF8ACAF8/captives-African-ships-Slave-Coast-slave-trade-1880.jpg');"></div>
@@ -100,6 +100,7 @@
                     <div class="gold-divider"></div>
                     <h3 class="entry-title">Text in Focus #3: Reading & Writing as a Process</h3>
                     <div class="md-content" data-file="content/text3.md"></div>
+                    <div class="scroll-hint">Scroll down for next text ↓</div>
                 </div>
             </div>
 
@@ -118,10 +119,6 @@
                 <div class="content-card">
                     <h2>Reading the World</h2>
                     <div class="gold-divider"></div>
-                    <h3 class="entry-title">Analysis: The Paradox of Devotion and Desire</h3>
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/XQXZfLbQc3k" title="History of Vietnamese Buddhism" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
                     <div class="md-content" data-file="content/world1.md"></div>
                     <div class="scroll-hint">Scroll down for next text ↓</div>
                 </div>
@@ -131,11 +128,8 @@
                 <div class="content-card">
                     <h2>Reading the World</h2>
                     <div class="gold-divider"></div>
-                    <h3 class="entry-title">Analysis: The Evolution of Ego and Greatness</h3>
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/nk6-TGUe2Sg" title="Cristiano Ronaldo Analysis" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
                     <div class="md-content" data-file="content/world2.md"></div>
+                    <div class="scroll-hint">Scroll down for next text ↓</div>
                 </div>
             </div>
 
@@ -144,6 +138,7 @@
                     <h2>Reading the World</h2>
                     <div class="gold-divider"></div>
                     <div class="md-content" data-file="content/world3.md"></div>
+                    <div class="scroll-hint">Scroll down for next text ↓</div>
                 </div>
             </div>
 
@@ -161,13 +156,46 @@
                 <div class="content-card essay-card">
                     <h2>Essay 1</h2>
                     <div class="gold-divider"></div>
-                    <h3 class="entry-title">First Draft: The Enduring Rhythm of Maya Angelou</h3>
-                    <div class="md-content" data-file="content/essay1.md"></div>
+                    
+                    <div class="essay-actions">
+                        <button class="action-btn" data-modal="modal-first-draft">First Draft & Comments</button>
+                        <button class="action-btn" data-modal="modal-peer-review">Peer Review</button>
+                    </div>
+
+                    <h3 class="entry-title">Final Draft (MLA Format)</h3>
+                    <div class="pdf-container">
+                        <iframe src="Essay #1 final draft.pdf"></iframe>
+                    </div>
                 </div>
             </div>
         </section>
 
     </div>
+
+    <div id="master-modal" class="modal-overlay">
+        <div class="modal-box">
+            <button class="close-btn" id="close-modal">&times;</button>
+            <div class="modal-content-area">
+                
+                <div id="modal-first-draft" class="modal-view">
+                    <h2>First Draft</h2>
+                    <div class="gold-divider"></div>
+                    <h3 class="entry-title">Hover over the dashed highlights to view peer comments.</h3>
+                    <div class="md-content" data-file="content/essay1.md"></div>
+                </div>
+                
+                <div id="modal-peer-review" class="modal-view">
+                    <h2>Peer Review</h2>
+                    <div class="gold-divider"></div>
+                    <div class="pdf-container" style="height: 65vh;">
+                        <iframe src="Peer review.pdf"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -236,15 +264,44 @@
                     targetSection.classList.add('active');
 
                     let targetBgId = targetSection.getAttribute('data-bg');
-                    
                     if (!targetBgId) {
                         const firstSlide = targetSection.querySelector('.snap-slide');
                         if (firstSlide) targetBgId = firstSlide.getAttribute('data-bg');
                     }
-
                     changeBackground(targetBgId);
                 });
             });
+
+            // 3. Modal Popup Logic
+            const modalOverlay = document.getElementById('master-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const modalViews = document.querySelectorAll('.modal-view');
+            const actionBtns = document.querySelectorAll('.action-btn');
+
+            // Open Modal
+            actionBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetId = btn.getAttribute('data-modal');
+                    // Hide all views, then show the target one
+                    modalViews.forEach(view => view.classList.remove('active'));
+                    document.getElementById(targetId).classList.add('active');
+                    // Fade in the overlay
+                    modalOverlay.classList.add('active');
+                });
+            });
+
+            // Close Modal on X button
+            closeModalBtn.addEventListener('click', () => {
+                modalOverlay.classList.remove('active');
+            });
+
+            // Close Modal when clicking outside the box
+            modalOverlay.addEventListener('click', (e) => {
+                if(e.target === modalOverlay) {
+                    modalOverlay.classList.remove('active');
+                }
+            });
+
         });
     </script>
 </body>
