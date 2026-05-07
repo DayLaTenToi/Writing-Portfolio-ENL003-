@@ -211,6 +211,45 @@ h3.entry-title {
     margin-bottom: 1rem;
 }
 
+/* NEW: Elegant Markdown Tables & Elements */
+.md-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.md-content th, .md-content td {
+    border: 1px solid rgba(197, 168, 128, 0.15);
+    padding: 1.5rem;
+    text-align: left;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+.md-content th {
+    color: #c5a880;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: normal;
+    background: rgba(197, 168, 128, 0.05);
+}
+
+.md-content strong {
+    color: #c5a880;
+    font-weight: 500;
+}
+
+.md-content hr {
+    border: 0;
+    height: 1px;
+    background: rgba(197, 168, 128, 0.2);
+    margin: 3rem 0;
+}
+
 /* Drop Cap for Essays */
 .drop-cap::first-letter {
     float: left;
