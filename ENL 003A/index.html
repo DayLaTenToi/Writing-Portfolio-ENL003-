@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stephen Ta — Academic Writing Showcase (ENL 003A)</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="An interactive, multi-disciplinary showcase of revised academic writings and reflective analysis for ENL 003A, exploring themes of poetry, fiction, art, and synthesis.">
+  <meta name="author" content="Stephen Ta">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+  
+  <!-- Markdown Parser (Marked.js) loaded via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+</head>
+<body data-theme="default">
+
+  <!-- Fullscreen Paint Canvas for the Art Page drawing engine -->
+  <canvas id="paint-canvas" class="paint-canvas"></canvas>
+
+  <!-- Ambient Glow Background Shapes -->
+  <div class="ambient-glow-container">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <!-- Floating Procedural Soundscape Controller (Unmuted/Active by default) -->
+  <button id="sound-toggle" class="floating-sound-btn playing" aria-label="Toggle ambient soundscape">
+    <i class="fa-solid fa-volume-xmark"></i>
+    <div class="sound-wave" id="sound-wave-anim">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </button>
+
+  <div class="app-container">
+    
+    <!-- 1. COVER SECTION (The Prism Interface) -->
+    <section id="cover-view" class="cover-section active">
+      <div class="cover-content">
+        
+        <!-- Header Text -->
+        <header class="cover-header">
+          <span class="course-code">ENL 003A</span>
+          <h1 class="student-name">Stephen Ta</h1>
+          <p class="site-subtitle">The Prism of Analysis</p>
+        </header>
+
+        <!-- Interactive Prism Visual Area -->
+        <div class="prism-outer-container">
+          <div class="prism-container" id="interactive-prism">
+            <svg class="prism-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Gradients for dynamic lighting -->
+                <linearGradient id="prism-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="rgba(255, 255, 255, 0.4)" />
+                  <stop offset="50%" stop-color="rgba(255, 255, 255, 0.15)" />
+                  <stop offset="100%" stop-color="rgba(255, 255, 255, 0.05)" />
+                </linearGradient>
+                <linearGradient id="beam-grad" x1="0%" y1="50%" x2="100%" y2="50%">
+                  <stop offset="0%" stop-color="rgba(255,255,255,0.8)" />
+                  <stop offset="30%" stop-color="var(--accent-glow)" />
+                  <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+                </linearGradient>
+              </defs>
+              
+              <!-- Refracted Light Beams (SVG Paths animated via JS) -->
+              <g class="prism-beams">
+                <path id="beam-top-left" d="M 100 110 L 40 40" stroke="url(#beam-grad)" stroke-width="2" fill="none" opacity="0" />
+                <path id="beam-top-right" d="M 100 110 L 160 40" stroke="url(#beam-grad)" stroke-width="2" fill="none" opacity="0" />
+                <path id="beam-bottom" d="M 100 110 L 40 180" stroke="url(#beam-grad)" stroke-width="2" fill="none" opacity="0" />
+                <path id="beam-center" d="M 100 110 L 160 180" stroke="url(#beam-grad)" stroke-width="2" fill="none" opacity="0" />
+              </g>
+
+              <!-- Central Glass Prism Structure -->
+              <g class="prism-shape">
+                <!-- Base / back faces -->
+                <polygon points="100,50 50,140 150,140" fill="url(#prism-grad)" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                <!-- Facet highlights -->
+                <line x1="100" y1="50" x2="100" y2="140" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" />
+                <polygon points="100,50 100,140 150,140" fill="rgba(255,255,255,0.05)" />
+              </g>
+            </svg>
+            
+            <!-- Dynamic center glow -->
+            <div class="prism-glow"></div>
+          </div>
+          
+          <!-- Outer Navigation Ring around the Prism -->
+          <nav class="navigation-ring" aria-label="Main Navigation">
+            <button class="nav-node node-poetry" data-doc="poetry" id="nav-poetry" aria-label="Read Poetry Analysis">
+              <span class="node-icon"><i class="fa-solid fa-feather-pointed"></i></span>
+              <span class="node-label">Where Theology & Non-Dualism Dance</span>
+              <span class="node-subtitle">Hopkins's Poetry</span>
+            </button>
+            
+            <button class="nav-node node-lottery" data-doc="lottery" id="nav-lottery" aria-label="Read Fiction Analysis">
+              <span class="node-icon"><i class="fa-solid fa-cubes"></i></span>
+              <span class="node-label">Tradition & Terror</span>
+              <span class="node-subtitle">Jackson's Fiction</span>
+            </button>
+            
+            <button class="nav-node node-art" data-doc="art" id="nav-art" aria-label="Read Art Analysis">
+              <span class="node-icon"><i class="fa-solid fa-palette"></i></span>
+              <span class="node-label">The Texture of a Season</span>
+              <span class="node-subtitle">Petersen's Art</span>
+            </button>
+            
+            <button class="nav-node node-journal" data-doc="journal" id="nav-journal" aria-label="Read Reflective Journal">
+              <span class="node-icon"><i class="fa-solid fa-compass"></i></span>
+              <span class="node-label">The Reflective Journal</span>
+              <span class="node-subtitle">Semester Synthesis</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- Explanatory note -->
+        <footer class="cover-footer">
+          <p>Hover over a path to focus the prism. Click to enter the text.</p>
+        </footer>
+
+      </div>
+    </section>
+
+    <!-- 2. CONTENT SECTION (The Text Viewer) -->
+    <section id="content-view" class="content-section">
+      
+      <!-- Top Navigation Bar -->
+      <nav class="top-nav">
+        <button id="btn-back-home" class="nav-back-btn" aria-label="Return to main menu">
+          <i class="fa-solid fa-arrow-left"></i> Home
+        </button>
+        <div class="top-nav-links">
+          <button class="tab-link" data-doc="poetry" id="tab-poetry">Poetry</button>
+          <button class="tab-link" data-doc="lottery" id="tab-lottery">Fiction</button>
+          <button class="tab-link" data-doc="art" id="tab-art">Art</button>
+          <button class="tab-link" data-doc="journal" id="tab-journal">Reflection</button>
+        </div>
+      </nav>
+
+      <!-- Scroll Progress Bar -->
+      <div class="progress-bar-container">
+        <div id="scroll-progress" class="progress-bar"></div>
+      </div>
+
+      <!-- Main Split View Container (for sidebars on desktop) -->
+      <div class="viewer-split-layout">
+        
+        <!-- Left: Text Canvas -->
+        <main class="document-canvas">
+          
+          <!-- Journal lock portal (Synthesis Mixer) -->
+          <div id="journal-lock-container" class="journal-lock-screen">
+            <div class="mixer-portal-card">
+              <h3><i class="fa-solid fa-shuffle"></i> Synthesize the Light</h3>
+              <p class="mixer-desc">To unlock your Reflective Journal, you must synthesize what you've learned. **Drag the three colored orbs together into the central prism.**</p>
+              
+              <div class="mixer-board" id="mixer-board">
+                <!-- Draggable nodes representing elements of the class -->
+                <div class="drag-orb drag-poetry" id="drag-poetry" data-type="poetry">
+                  <i class="fa-solid fa-feather-pointed"></i>
+                  <span class="orb-name">Poetry</span>
+                </div>
+                <div class="drag-orb drag-lottery" id="drag-lottery" data-type="lottery">
+                  <i class="fa-solid fa-cubes"></i>
+                  <span class="orb-name">Fiction</span>
+                </div>
+                <div class="drag-orb drag-art" id="drag-art" data-type="art">
+                  <i class="fa-solid fa-palette"></i>
+                  <span class="orb-name">Visual Art</span>
+                </div>
+                
+                <!-- Target Zone -->
+                <div class="mixer-dropzone" id="mixer-dropzone">
+                  <svg viewBox="0 0 100 100" class="dropzone-svg">
+                    <polygon points="50,15 20,80 80,80" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" />
+                    <circle cx="50" cy="55" r="12" fill="none" stroke="var(--accent-color)" stroke-width="1" stroke-dasharray="3,3" />
+                  </svg>
+                  <div class="dropzone-label">Converge Here</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Unlocked Document Viewer -->
+          <article id="document-viewer" class="markdown-body">
+            <div class="loading-spinner">
+              <i class="fa-solid fa-circle-notch fa-spin"></i> Loading text...
+            </div>
+          </article>
+
+          <!-- Dynamic Page Navigation Footer -->
+          <footer class="document-footer">
+            <button id="btn-prev-doc" class="footer-nav-btn prev">
+              <span class="direction"><i class="fa-solid fa-chevron-left"></i> Previous</span>
+              <span class="title">Document Title</span>
+            </button>
+            <button id="btn-next-doc" class="footer-nav-btn next">
+              <span class="direction">Next <i class="fa-solid fa-chevron-right"></i></span>
+              <span class="title">Document Title</span>
+            </button>
+          </footer>
+        </main>
+
+        <!-- Right Sidebars (Sticky widgets that display corresponding side columns) -->
+        <!-- Poetry Sidebar -->
+        <aside class="sidebar-widget poetry-widget" id="sidebar-poetry">
+          <div class="widget-sticky-content">
+            <h3 class="sidebar-title">God's Grandeur</h3>
+            <p class="sidebar-meta">By Gerard Manley Hopkins</p>
+            <div class="poem-display-board">
+              <div class="poem-line" data-line="1"><span class="l-num">1</span> The world is charged with the grandeur of God.</div>
+              <div class="poem-line" data-line="2"><span class="l-num">2</span> It will flame out, like shining from shook foil;</div>
+              <div class="poem-line" data-line="3"><span class="l-num">3</span> It gathers to a greatness, like the ooze of oil</div>
+              <div class="poem-line" data-line="4"><span class="l-num">4</span> Crushed. Why do men then now not reckon his rod?</div>
+              <div class="poem-line" data-line="5"><span class="l-num">5</span> Generations have trod, have trod, have trod;</div>
+              <div class="poem-line" data-line="6"><span class="l-num">6</span> And all is seared with trade; bleared, smeared with toil;</div>
+              <div class="poem-line" data-line="7"><span class="l-num">7</span> And wears man's smudge and shares man's smell: the soil</div>
+              <div class="poem-line" data-line="8"><span class="l-num">8</span> Is bare now, nor can foot feel, being shod.</div>
+              <div class="poem-line" data-line="9"><span class="l-num">9</span> And for all this, nature is never spent;</div>
+              <div class="poem-line" data-line="10"><span class="l-num">10</span> There lives the dearest freshness deep down things;</div>
+              <div class="poem-line" data-line="11"><span class="l-num">11</span> And though the last lights off the black West went</div>
+              <div class="poem-line" data-line="12"><span class="l-num">12</span> Oh, morning, at the brown brink eastward, springs—</div>
+              <div class="poem-line" data-line="13"><span class="l-num">13</span> Because the Holy Ghost over the bent</div>
+              <div class="poem-line" data-line="14"><span class="l-num">14</span> World broods with warm breast and with ah! bright wings.</div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Fiction Sidebar (The Interactive Black Box Lottery Drawing) -->
+        <aside class="sidebar-widget lottery-widget" id="sidebar-lottery">
+          <div class="widget-sticky-content">
+            <h3 class="sidebar-title">The Black Box</h3>
+            <p class="sidebar-meta">The Ritual of Drawing</p>
+            
+            <div class="lottery-interactive-container">
+              <!-- Interactive Wooden Box Visual -->
+              <div class="box-graphics-wrapper" id="lottery-box-graphics">
+                <div class="lottery-box-item">
+                  <div class="box-top-lid"></div>
+                  <div class="box-main-body">
+                    <div class="box-texture-grain"></div>
+                    <div class="box-drawing-slit"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- State status and prompts -->
+              <div class="lottery-ritual-status" id="lottery-status-msg">
+                Click the black box to draw slips for the town's families.
+              </div>
+
+              <!-- Slips display area -->
+              <div class="lottery-slips-board" id="lottery-slips-board">
+                <!-- Generated dynamically by Javascript -->
+              </div>
+
+              <!-- Control / Reset button -->
+              <button class="lottery-action-btn" id="lottery-action-btn" style="display: none;">Reset Drawing</button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Art Sidebar -->
+        <aside class="sidebar-widget art-widget" id="sidebar-art">
+          <div class="widget-sticky-content">
+            <h3 class="sidebar-title">Spring Luncheon (1961)</h3>
+            <p class="sidebar-meta">Roland Petersen</p>
+            <div class="interactive-painting-box">
+              <img src="spring_luncheon.png" alt="Roland Petersen's Spring Luncheon" class="painting-base-img">
+              
+              <!-- SVG Highlight Mask overlay -->
+              <svg class="painting-mask-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Left Vertical Trees -->
+                <polygon id="mask-trees" points="0,0 85,0 75,300 0,300" class="painting-mask-path" />
+                <!-- Center Dark Indigo Slashes -->
+                <polygon id="mask-slashes" points="75,130 350,110 345,190 70,215" class="painting-mask-path" />
+                <!-- Tablecloth base -->
+                <polygon id="mask-tablecloth" points="160,195 385,120 400,300 135,300" class="painting-mask-path" />
+                <!-- Round plates on Tablecloth -->
+                <polygon id="mask-plates" points="200,240 280,195 350,220 320,290 220,285" class="painting-mask-path" />
+              </svg>
+            </div>
+            <p class="painting-guide-note"><i class="fa-solid fa-circle-nodes"></i> As you scroll, key portions of the composition will dynamically highlight above.</p>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- 3. FILE PROTOCOL/CORS WARNING BANNER (User Friendly Notice) -->
+    <div id="local-server-banner" class="notification-banner">
+      <div class="banner-content">
+        <i class="fa-solid fa-circle-info"></i>
+        <span><strong>Viewing Local File:</strong> The website is running on <code>file://</code>. Editing `.md` files requires a local server (e.g. <code>python3 -m http.server</code>). In the meantime, pre-loaded backup texts are fully active!</span>
+        <button id="close-banner" aria-label="Close notification"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Main JavaScript Logic -->
+  <script src="index.js"></script>
+</body>
+</html>
