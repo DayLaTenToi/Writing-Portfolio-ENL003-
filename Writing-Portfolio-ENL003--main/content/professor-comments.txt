@@ -1,3 +1,0 @@
-# Professor comments
-# Each saved comment uses this format:
-# In "[name of essay]" at the part "[the part that he highlighted]" professor said that "[his comment]"
